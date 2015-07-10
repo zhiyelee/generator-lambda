@@ -1,29 +1,31 @@
 {
   "name": "generator-lambda",
-  "version": "0.0.1",
+  "version": "0.0.0",
   "description": "AWS Lambda function generator.",
   "license": "MIT",
+  "main": "app/index.js",
   "repository": "zhiyelee/generator-lambda",
   "author": {
-    "name": "zhiyelee",
-    "email": "zhiyelee@gmail.com",
-    "url": "zhy.li"
-  },
-  "engines": {
-    "node": ">=0.10.0"
+    "name": "Zhiye Li",
+    "email": "github@zhiye.li",
+    "url": "https://github.com/zhiyelee"
   },
   "scripts": {
     "test": "mocha"
   },
   "files": [
-    "index.js"
+    "generators"
   ],
   "keywords": [
     "yeoman-generator",
     "aws",
     "lambda"
   ],
-  "dependencies": {},
+  "dependencies": {
+    "yeoman-generator": "^0.19.0",
+    "chalk": "^1.0.0",
+    "yosay": "^1.0.2"
+  },
   "devDependencies": {
     "mocha": "*"
   }
