@@ -1,7 +1,7 @@
 {
   "name": "generator-lambda",
-  "version": "0.0.0",
-  "description": "My slick module",
+  "version": "0.0.1",
+  "description": "AWS Lambda function generator.",
   "license": "MIT",
   "repository": "zhiyelee/generator-lambda",
   "author": {
@@ -19,7 +19,9 @@
     "index.js"
   ],
   "keywords": [
-    ""
+    "yeoman-generator",
+    "aws",
+    "lambda"
   ],
   "dependencies": {},
   "devDependencies": {
