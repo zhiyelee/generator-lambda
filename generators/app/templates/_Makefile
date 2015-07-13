@@ -1,0 +1,65 @@
+func = <%= functionName %>
+role = <%= role %>
+timeout = <%= timeout %>
+memorySize = <%= memorySize %>
+awsAccountId = <%= awsAccountId %>
+
+<% if (isS3Lambda) { %>
+bucket = <%= bucketName %>
+bucketARN = arn:aws:s3:::$(bucket)
+bucketOwerId = <%= bucketOwnerId %>
+region = <%= region %>
+events = <%= events %>
+<% } %>
+
+update: all
+	aws lambda update-function-code --function-name $(func) --zip-file fileb://pkg.zip
+	rm pkg.zip
+
+all:
+	[ -e "pkg.zip" ] && rm pkg.zip &2> /dev/null
+	npm i
+	zip -r pkg.zip .
+
+# create function, add necessary Access Policy
+#   and configure s3 notification (if necessary)
+create:
+	[ -e "pkg.zip" ] && rm pkg.zip &2> /dev/null
+	zip -r pkg.zip .
+	aws lambda create-function \
+		--function-name $(func) \
+		--zip-file fileb://pkg.zip \
+		--role arn:aws:iam::$(awsAccountId):role/$(role) \
+		--handler index.handler \
+		--timeout $(timeout) \
+		--memory-size $(memorySize) \
+		--runtime nodejs
+
+<% if (isS3Lambda) { %>
+	# add  Access Policy
+	aws lambda add-permission \
+		--function-name $(func) \
+		--statement-id $(func) \
+		--action "lambda:InvokeFunction" \
+		--principal s3.amazonaws.com \
+		--source-arn $(bucketARN) \
+		--source-account $(bucketOwerId)
+
+	# configure s3 notification
+	aws s3api put-bucket-notification-configuration \
+		--bucket $(bucket) \
+		--notification-configuration \
+			'{"LambdaFunctionConfigurations": \
+				[{ \
+					"Id":"$(bucketARN)_$(func)", \
+					"LambdaFunctionArn":"arn:aws:lambda:$(region):$(awsAccountId):function:$(func)", \
+					"Events": $(events)\
+				}] \
+			}'
+<% } %>
+	rm pkg.zip
+delete:
+	aws lambda delete-function \
+		--function-name $(func)
+
+.PHONY: all update create delete
