@@ -1,10 +1,10 @@
 {
   "name": "generator-lambda",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "AWS Lambda function generator.",
   "license": "MIT",
   "main": "app/index.js",
-  "repository": "zhiyelee/generator-lambda",
+  "repository": "70kft/generator-lambda",
   "author": {
     "name": "Zhiye Li",
     "email": "github@zhiye.li",
