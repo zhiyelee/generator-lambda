@@ -1,6 +1,6 @@
 {
   "name": "generator-lambda",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "AWS Lambda function generator.",
   "license": "MIT",
   "main": "app/index.js",
@@ -8,7 +8,7 @@
   "author": {
     "name": "Zhiye Li",
     "email": "github@zhiye.li",
-    "url": "https://github.com/zhiyelee"
+    "url": "https://zhiye.li"
   },
   "scripts": {
     "test": "mocha"
