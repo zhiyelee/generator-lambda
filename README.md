@@ -5,28 +5,17 @@
 
 ## Getting Started
 
-
-To install generator-lambda from npm, run:
+Install and use generator
 
 ```bash
+# install generator
 npm install -g generator-lambda
+
+# run
 yo lambda
 ```
 
 ## Work with the generated lambda function
-
-### Makefile integrated
-
-```bash
-# create function, and connect it with inputed s3 bucket
-make create
-
-# update function code
-make
-
-# delete function
-make delete
-```
 
 ### Structure
 
@@ -43,6 +32,19 @@ make delete
 * `index.js`        Function code here, please do not change the file name, if you want, please change the `Makefile`  too.
 * `Makefile`        Wrap of aws cli, provide function create/update/delete
 * `package.json`    Any extra dependency here, use `npm i --save` for reuse.
+
+### Makefile integrated
+
+```bash
+# create function, and connect it with inputed s3 bucket
+make create
+
+# update function code
+make
+
+# delete function
+make delete
+```
 
 
 ## License
