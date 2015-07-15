@@ -19,13 +19,19 @@ update: all
 all:
 	[ -e "pkg.zip" ] && rm pkg.zip &2> /dev/null
 	npm i
-	zip -r pkg.zip .
+	zip -r pkg.zip . \
+		--exclude=test* \
+		--exclude=node_modules/aws-sdk*
 
 # create function, add necessary Access Policy
 #   and configure s3 notification (if necessary)
 create:
 	[ -e "pkg.zip" ] && rm pkg.zip &2> /dev/null
-	zip -r pkg.zip .
+	zip -r pkg.zip . \
+		--exclude=test* \
+		--exclude=node_modules/aws-sdk*
+
+	# create function
 	aws lambda create-function \
 		--function-name $(func) \
 		--zip-file fileb://pkg.zip \
