@@ -111,16 +111,8 @@ module.exports = yeoman.generators.Base.extend({
       {
         type: 'confirm',
         name: 'isInputS3',
-        message: 'If generate S3 object input file, make s3 to trigger the test',
+        message: 'Weather to generate test command for S3',
         default: true
-      },
-      {
-        type: 'input',
-        name: 'inputS3',
-        message: 'S3 input file name',
-        when: isInputS3,
-        store: true,
-        default: 'input-s3.json'
       }
     ];
 

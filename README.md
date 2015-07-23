@@ -42,10 +42,17 @@ make create
 # update function code
 make
 
+# test lambda function with S3 object
+make S3
+
 # delete function
 make delete
 ```
 
+## How it works
+### make S3
+using default test S3 object happy face as an input file
+file path: `input/input-s3.json`
 
 ## License
 
