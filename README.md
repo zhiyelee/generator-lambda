@@ -42,7 +42,7 @@ make create
 # update function code
 make
 
-# test lambda function with S3 object
+# test lambda function with a mock S3 PUT event
 make S3
 
 # delete function
@@ -50,9 +50,14 @@ make delete
 ```
 
 ## How it works
-### make S3
-using default test S3 object happy face as an input file
-file path: `input/input-s3.json`
+
+### `make S3`
+
+Use the `aws lambda invoke` command to test deployed lambda function with a mock s3 `PUT` event. The command will also print the log produced by the lambda function, which can also be seen in the AWS CloudWatch service. 
+
+The mock data can be found in `input/input-s3.json`. It is much like a demo, feel free to edit it.
+
+**Note:** If you want to Read/Write the resource referred in the event, please make sure your do own them.
 
 ## License
 

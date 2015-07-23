@@ -12,9 +12,7 @@ region = <%= region %>
 events = <%= events %>
 <% } %>
 
-<% if (isInputS3) { %>
-inputS3 = <%= inputS3%>
-<% } %>
+inputS3 = input-s3.json
 
 update: all
 	aws lambda update-function-code --function-name $(func) --zip-file fileb://pkg.zip
