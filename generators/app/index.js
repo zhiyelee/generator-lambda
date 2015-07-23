@@ -17,6 +17,10 @@ module.exports = yeoman.generators.Base.extend({
         return answers.isS3Lambda;
     }
 
+    function isInputS3(answers) {
+        return answers.isInputS3;
+    }
+
     var prompts = [
       {
         type: 'input',
@@ -103,6 +107,20 @@ module.exports = yeoman.generators.Base.extend({
         when: isS3Relative,
         store: true,
         default: 'us-east-1'
+      },
+      {
+        type: 'confirm',
+        name: 'isInputS3',
+        message: 'If generate S3 object input file, make s3 to trigger the test',
+        default: true
+      },
+      {
+        type: 'input',
+        name: 'inputS3',
+        message: 'S3 input file name',
+        when: isInputS3,
+        store: true,
+        default: 'input-s3.json'
       }
     ];
 
@@ -119,6 +137,7 @@ module.exports = yeoman.generators.Base.extend({
   writing: {
     app: function () {
       var props = this.props;
+      console.log(props);
       this.fs.copyTpl(
         this.templatePath('_Makefile'),
         this.destinationPath('Makefile'),
@@ -132,6 +151,12 @@ module.exports = yeoman.generators.Base.extend({
         this.templatePath('_package.json'),
         this.destinationPath('package.json')
       );
+      if(props.isInputS3) {
+        this.fs.copy(
+            this.templatePath('input/input-s3.json'),
+            this.destinationPath('input/input-s3.json')
+        );
+      }
     },
 
     projectfiles: function () {
