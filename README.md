@@ -53,7 +53,8 @@ make delete
 
 ### `make S3`
 
-Use the `aws lambda invoke` command to test deployed lambda function with a mock s3 `PUT` event. The command will also print the log produced by the lambda function, which can also be seen in the AWS CloudWatch service. 
+Use the `aws lambda invoke` command to test deployed lambda function with a mock s3 `PUT` event.
+The command will print the log produced by the lambda function, which can also be seen in the AWS CloudWatch service. 
 
 The mock data can be found in `input/input-s3.json`. It is much like a demo, feel free to edit it.
 
