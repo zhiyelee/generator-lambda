@@ -63,13 +63,6 @@ module.exports = yeoman.generators.Base.extend({
         when: isS3Relative
       },
       {
-        type: 'input',
-        name: 'bucketOwnerId',
-        when: isS3Relative,
-        store: true,
-        message: 'Bucket owner\'s account ID'
-      },
-      {
         type: 'checkbox',
         name: 'events',
         message: 'Events of Notifications.',

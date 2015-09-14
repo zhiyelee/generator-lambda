@@ -7,12 +7,9 @@ awsAccountId = <%= awsAccountId %>
 <% if (isS3Lambda) { %>
 bucket = <%= bucketName %>
 bucketARN = arn:aws:s3:::$(bucket)
-bucketOwerId = <%= bucketOwnerId %>
 region = <%= region %>
 events = <%= events %>
 <% } %>
-
-inputS3 = input-s3.json
 
 update: all
 	aws lambda update-function-code --function-name $(func) --zip-file fileb://pkg.zip
@@ -51,7 +48,7 @@ create:
 		--action "lambda:InvokeFunction" \
 		--principal s3.amazonaws.com \
 		--source-arn $(bucketARN) \
-		--source-account $(bucketOwerId)
+		--source-account $(awsAccountId)
 
 	# configure s3 notification
 	aws s3api put-bucket-notification-configuration \
@@ -70,13 +67,5 @@ delete:
 	aws lambda delete-function \
 		--function-name $(func)
 
-<% if (isInputS3) { %>
-S3:
-	aws lambda invoke \
-		--function-name $(func) \
-		--payload file://input/$(inputS3) \
-		--invocation-type RequestResponse \
-		--log-type Tail /dev/null | awk -F '"' '{print $$4 }'  | base64 --decode
-<% } %>
 
 .PHONY: all update create delete
