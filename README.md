@@ -25,13 +25,16 @@ yo lambda
 ### Structure
 
 ```
-➜ tree
-.
 ├── Makefile
 ├── index.js
-└── package.json
-
-0 directories, 3 files
+├── package.json
+├── test
+│   ├── ctx.js
+│   ├── helloworld.json
+│   ├── s3_delete.json
+│   ├── s3_put.json
+│   └── sns.json
+└── test.js
 ```
 
 * `index.js`        Function code here, please do not change the file name, if you want, please change the `Makefile`  too.
